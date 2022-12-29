@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mb-3">Edit Contact</h2>
+
+            <% if (typeof errors != 'undefined') { %>
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <% errors.forEach((error) => { %>
+                            <li><%= error.msg %></li>
+                        <% }) %>
+                    </ul>
+                  </div>
+            <% } %>
+
+            <form method="post" action="/contact?_method=PUT">
+                <input type="hidden" name="_id" value="<%= person._id %>"/>
+                <input type="hidden" name="oldNama" value="<%= person.oldNama || person.nama %>"> <!-- handle biar value gaberubah tiap error -->
+                <div class="mb-3">
+                  <label for="nama" class="form-label">Nama</label>
+                  <input type="text" class="form-control" id="nama" name="nama" required value="<%= person.nama %>">
+                </div>
+                <div class="mb-3">
+                  <label for="phoneNum" class="form-label">Nomor HP</label>
+                  <input type="text" class="form-control" id="phoneNum" name="nohp" required value="<%= person.nohp %>">
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required value="<%= person.email %>">
+                </div>
+                <button type="submit" class="btn btn-primary">Update Contact</button>
+            </form>
+        </div>
+    </div>
+</div>

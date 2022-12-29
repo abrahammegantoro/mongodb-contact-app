@@ -1,0 +1,50 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Contact List</h2>
+
+            <a href="/contact/add" class="btn btn-primary mb-2">Add Contact</a>
+
+            <% if (msg.length !== 0) { %>
+              <div class="alert alert-success" role="alert">
+                <%= msg %>
+              </div>
+            <% } %>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (contacts.length == 0) { %>
+                    <tr>
+                      <td colspan="4">
+                        <div class="alert alert-danger" role="alert">
+                            Daftar Kontak Kosong!
+                        </div>
+                      </td>
+                    </tr>
+                    <% } else { contacts.forEach((person, num) => { num++ %>
+                    <tr>
+                      <th scope="row"><%= num++ %></th>
+                      <td><%= person.nama %></td>
+                      <td><%= person.nohp %></td>
+                      <td>
+                          <a href="/contact/<%= person.nama %>" class="btn btn-success badge rounded-pill"><i class="bi bi-info-circle"></i> Detail</a>
+                          <form action="/contact?_method=DELETE" method="POST" class="d-inline">
+                            <input type="hidden" name="_id" value="<%= person._id %>">
+                            <button type="submit" class="btn btn-danger badge rounded-pill" onclick="return confirm('Are you sure?')"><i class="bi bi-x-circle"></i> Delete</button>
+                          </form>
+                          <a href="/contact/edit/<%= person.nama %>" class="btn btn-warning badge rounded-pill"><i class="bi bi-x-circle"></i> Edit</a>
+                      </td>
+                    </tr>
+                  <% })} %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
